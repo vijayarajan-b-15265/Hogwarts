@@ -1,7 +1,6 @@
 package com.example.mailjet.data
 
 import com.example.mailjet.R
-import com.example.mailjet.Wand
 
 data class HogwartsDataHelper(
     val actor: String,
@@ -26,8 +25,8 @@ data class HogwartsDataHelper(
 )
 
 fun geUsersList(): List<HogwartsDataHelper> {
-    val HogwartsDataHelperList = ArrayList<HogwartsDataHelper>()
-    HogwartsDataHelperList.add(
+    val HogwartsHelperList = ArrayList<HogwartsDataHelper>()
+    HogwartsHelperList.add(
         HogwartsDataHelper(
             name = "Harry Potter",
             house = "Gryffindor",
@@ -35,7 +34,7 @@ fun geUsersList(): List<HogwartsDataHelper> {
             yearOfBirth = R.drawable.hogwarts_logo
         )
     )
-    HogwartsDataHelperList.add(
+    HogwartsHelperList.add(
         HogwartsDataHelper(
             name = "Hermione Granger",
             house = "Gryffindor",
@@ -43,7 +42,7 @@ fun geUsersList(): List<HogwartsDataHelper> {
             yearOfBirth = R.drawable.hogwarts_logo
         )
     )
-    HogwartsDataHelperList.add(
+    HogwartsHelperList.add(
         HogwartsDataHelper(
             name = "Ron Weasley",
             house = "Gryffindor",
@@ -51,7 +50,7 @@ fun geUsersList(): List<HogwartsDataHelper> {
             yearOfBirth = R.drawable.hogwarts_logo
         )
     )
-    HogwartsDataHelperList.add(
+    HogwartsHelperList.add(
         HogwartsDataHelper(
             name = "Draco Malfoy",
             house = "Slytherin",
@@ -59,7 +58,7 @@ fun geUsersList(): List<HogwartsDataHelper> {
             yearOfBirth = R.drawable.hogwarts_logo
         )
     )
-    HogwartsDataHelperList.add(
+    HogwartsHelperList.add(
         HogwartsDataHelper(
             name = "Cedric Diggory",
             house = "Hufflepuff",
@@ -67,7 +66,7 @@ fun geUsersList(): List<HogwartsDataHelper> {
             yearOfBirth = R.drawable.hogwarts_logo
         )
     )
-    HogwartsDataHelperList.add(
+    HogwartsHelperList.add(
         HogwartsDataHelper(
             name = "Cho Chang",
             house = "Ravenclaw",
@@ -75,7 +74,7 @@ fun geUsersList(): List<HogwartsDataHelper> {
             yearOfBirth = R.drawable.hogwarts_logo
         )
     )
-    HogwartsDataHelperList.add(
+    HogwartsHelperList.add(
         HogwartsDataHelper(
             name = "Bellatrix Lestrange",
             house = "Slytherin",
@@ -83,7 +82,7 @@ fun geUsersList(): List<HogwartsDataHelper> {
             yearOfBirth = R.drawable.hogwarts_logo
         )
     )
-    HogwartsDataHelperList.add(
+    HogwartsHelperList.add(
         HogwartsDataHelper(
             name = "Lord Voldemort",
             house = "Slytherin",
@@ -91,7 +90,7 @@ fun geUsersList(): List<HogwartsDataHelper> {
             yearOfBirth = R.drawable.hogwarts_logo
         )
     )
-    HogwartsDataHelperList.add(
+    HogwartsHelperList.add(
         HogwartsDataHelper(
             name = "Percy Weasley",
             house = "Gryffindor",
@@ -99,7 +98,7 @@ fun geUsersList(): List<HogwartsDataHelper> {
             yearOfBirth = R.drawable.hogwarts_logo
         )
     )
-    HogwartsDataHelperList.add(
+    HogwartsHelperList.add(
         HogwartsDataHelper(
             name = "Hannah Abbott",
             house = "Hufflepuff",
@@ -107,7 +106,7 @@ fun geUsersList(): List<HogwartsDataHelper> {
             yearOfBirth = R.drawable.hogwarts_logo
         )
     )
-    HogwartsDataHelperList.add(
+    HogwartsHelperList.add(
         HogwartsDataHelper(
             name = "Lisa Turpin",
             house = "Ravenclaw",
@@ -115,5 +114,5 @@ fun geUsersList(): List<HogwartsDataHelper> {
             yearOfBirth = R.drawable.hogwarts_logo
         )
     )
-    return HogwartsDataHelperList
+    return HogwartsHelperList
 }

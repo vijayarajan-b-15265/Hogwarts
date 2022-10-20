@@ -1,4 +1,4 @@
-package com.example.mailjet
+package com.example.mailjet.data
 
 data class Wand(
     val core: String,
