@@ -1,7 +1,7 @@
 package com.example.mailjet
 
-import android.app.Activity
-import android.widget.Toast
+
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -79,6 +78,12 @@ fun MailItem(HogwartsDataHelper: HogwartsDataHelper) {
 }
 
 @Composable
+fun AlphabetIndexItem(text: String) {
+    Text(text = text, modifier = Modifier.padding(start = 10.dp))
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
 fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList()) {
 
     Surface {
@@ -103,6 +108,21 @@ fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList()) {
             Row(Modifier.background(MaterialTheme.colors.onPrimary)) {
 
                 LazyColumn {
+                    stickyHeader {
+                        AlphabetIndexItem("A")
+                    }
+                    items(profileList) {
+                        MailItem(HogwartsDataHelper = it)
+                    }
+                    stickyHeader {
+                        AlphabetIndexItem("B")
+                    }
+                    items(profileList) {
+                        MailItem(HogwartsDataHelper = it)
+                    }
+                    stickyHeader {
+                        AlphabetIndexItem("C")
+                    }
                     items(profileList) {
                         MailItem(HogwartsDataHelper = it)
                     }
