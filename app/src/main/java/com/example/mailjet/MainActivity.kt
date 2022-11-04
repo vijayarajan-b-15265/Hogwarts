@@ -21,9 +21,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-@Preview(uiMode = UI_MODE_NIGHT_NO)
-@Preview(uiMode = UI_MODE_NIGHT_YES)
-fun Pre() {
-    UserProfileList(geUsersList())
-}

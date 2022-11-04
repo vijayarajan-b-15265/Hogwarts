@@ -29,7 +29,7 @@ fun geUsersList(): List<HogwartsDataHelper> {
     HogwartsHelperList.add(
         HogwartsDataHelper(
             name = "Harry Potter",
-            house = "Gryffindor",
+            house = "Gryffindor ",
             actor = "Daniel Radcliffe",
             yearOfBirth = R.drawable.hogwarts_logo
         )
@@ -38,7 +38,7 @@ fun geUsersList(): List<HogwartsDataHelper> {
         HogwartsDataHelper(
             name = "Hermione Granger",
             house = "Gryffindor",
-            actor = "Daniel Radcliffe",
+            actor = "Emma Watson",
             yearOfBirth = R.drawable.hogwarts_logo
         )
     )
