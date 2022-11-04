@@ -1,12 +1,17 @@
 package com.example.mailjet.ui.theme
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion
+import com.example.mailjet.R
 
 private val DarkColorPalette = darkColors(
     primary = Color.Black,
@@ -29,6 +34,25 @@ private val LightColorPalette = lightColors(
     */
 )
 
+class DrawableResources(
+        @DrawableRes val navigationUp : Int
+)
+
+val LocalDrawableResources = staticCompositionLocalOf<DrawableResources>{
+    error("Local drawable are not present")
+}
+
+
+
+
+private val DarkThemeDrawables = DrawableResources(
+    navigationUp = R.drawable.ic_tag
+)
+
+private val LightThemeDrawables = DrawableResources(
+    navigationUp = R.drawable.ic_tag
+)
+
 @Composable
 fun MailJetTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
@@ -37,10 +61,21 @@ fun MailJetTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composabl
         LightColorPalette
     }
 
+    val appDrawables = if (darkTheme){
+        DarkThemeDrawables
+    }
+    else {
+        LightThemeDrawables
+    }
+
     MaterialTheme(
         colors = colors,
         typography = Typography,
         shapes = Shapes,
-        content = content
+//        content
     )
+    {
+        CompositionLocalProvider( LocalDrawableResources provides appDrawables,
+            content = content )
+    }
 }

@@ -1,7 +1,6 @@
 package com.example.mailjet
 
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,17 +22,20 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons.Filled
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.mailjet.data.HogwartsDataHelper
+import com.example.mailjet.ui.theme.AppbarColor
+import com.example.mailjet.ui.theme.LocalDrawableResources
 import com.example.mailjet.ui.theme.Shapes
 
 
@@ -42,7 +44,8 @@ fun MailItem(HogwartsDataHelper: HogwartsDataHelper ) {
 
     Card(
         modifier = Modifier
-            .background(MaterialTheme.colors.surface, shape = Shapes.medium),
+            .background(MaterialTheme.colors.surface, shape = Shapes.medium)
+            .padding(top = 10.dp) ,
         elevation = 10.dp
     ) {
 
@@ -109,10 +112,11 @@ fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList()) {
                     },
                     navigationIcon = {
                         IconButton(onClick = { }) {
-                            Icon(imageVector =  Filled.ArrowBack
-                                , contentDescription = "Nav back")
+                            Icon(
+                                imageVector =  ImageVector.vectorResource(id = LocalDrawableResources.current.navigationUp),
+                                contentDescription = "Nav back")
                         }
-                    },
+                    }, backgroundColor = AppbarColor
                 )
             },
             floatingActionButton = {
@@ -120,9 +124,10 @@ fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList()) {
             },
             bottomBar = {
 
-            }, content = {
+            },
+            content = {
 
-                LazyColumn (contentPadding = PaddingValues(horizontal = 20.dp, vertical = 20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                LazyColumn (verticalArrangement = Arrangement.spacedBy(10.dp), contentPadding = PaddingValues(20.dp)) {
 
                     items(profileList) {
                         MailItem(HogwartsDataHelper = it)
@@ -136,6 +141,7 @@ fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList()) {
                         MailItem(HogwartsDataHelper = it)
                     }
                 }
-            })
+            }
+        )
     }
 }
