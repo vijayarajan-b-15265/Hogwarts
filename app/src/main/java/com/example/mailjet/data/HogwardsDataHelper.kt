@@ -29,9 +29,9 @@ fun getUsersList(): List<HogwartsDataHelper> {
     HogwartsHelperList.add(
         HogwartsDataHelper(
             name = "Harry Potter",
-            house = "Gryffindor ",
+            house = "Gryffindor",
             actor = "Daniel Radcliffe",
-            yearOfBirth = R.drawable.hogwarts_logo
+            yearOfBirth = R.drawable.pikachu
         )
     )
     HogwartsHelperList.add(
@@ -39,7 +39,7 @@ fun getUsersList(): List<HogwartsDataHelper> {
             name = "Hermione Granger",
             house = "Gryffindor",
             actor = "Emma Watson",
-            yearOfBirth = R.drawable.hogwarts_logo
+            yearOfBirth = R.drawable.pikachu
         )
     )
     HogwartsHelperList.add(
@@ -47,7 +47,7 @@ fun getUsersList(): List<HogwartsDataHelper> {
             name = "Ron Weasley",
             house = "Gryffindor",
             actor = "Rupert Grint",
-            yearOfBirth = R.drawable.hogwarts_logo
+            yearOfBirth = R.drawable.pikachu
         )
     )
     HogwartsHelperList.add(
@@ -55,7 +55,7 @@ fun getUsersList(): List<HogwartsDataHelper> {
             name = "Draco Malfoy",
             house = "Slytherin",
             actor = "Tom Felton",
-            yearOfBirth = R.drawable.hogwarts_logo
+            yearOfBirth = R.drawable.pikachu
         )
     )
     HogwartsHelperList.add(
@@ -63,7 +63,7 @@ fun getUsersList(): List<HogwartsDataHelper> {
             name = "Cedric Diggory",
             house = "Hufflepuff",
             actor = "Robert Pattinson",
-            yearOfBirth = R.drawable.hogwarts_logo
+            yearOfBirth = R.drawable.pikachu
         )
     )
     HogwartsHelperList.add(
@@ -71,7 +71,7 @@ fun getUsersList(): List<HogwartsDataHelper> {
             name = "Cho Chang",
             house = "Ravenclaw",
             actor = "Katie Leung",
-            yearOfBirth = R.drawable.hogwarts_logo
+            yearOfBirth = R.drawable.pikachu
         )
     )
     HogwartsHelperList.add(
@@ -79,7 +79,7 @@ fun getUsersList(): List<HogwartsDataHelper> {
             name = "Bellatrix Lestrange",
             house = "Slytherin",
             actor = "Helena Bonham Carter",
-            yearOfBirth = R.drawable.hogwarts_logo
+            yearOfBirth = R.drawable.pikachu
         )
     )
     HogwartsHelperList.add(
@@ -87,7 +87,7 @@ fun getUsersList(): List<HogwartsDataHelper> {
             name = "Lord Voldemort",
             house = "Slytherin",
             actor = "Ralph Fiennes",
-            yearOfBirth = R.drawable.hogwarts_logo
+            yearOfBirth = R.drawable.pikachu
         )
     )
     HogwartsHelperList.add(
@@ -95,7 +95,7 @@ fun getUsersList(): List<HogwartsDataHelper> {
             name = "Percy Weasley",
             house = "Gryffindor",
             actor = "Chris Rankin",
-            yearOfBirth = R.drawable.hogwarts_logo
+            yearOfBirth = R.drawable.pikachu
         )
     )
     HogwartsHelperList.add(
@@ -103,7 +103,7 @@ fun getUsersList(): List<HogwartsDataHelper> {
             name = "Hannah Abbott",
             house = "Hufflepuff",
             actor = "Charlotte Skeoch",
-            yearOfBirth = R.drawable.hogwarts_logo
+            yearOfBirth = R.drawable.pikachu
         )
     )
     HogwartsHelperList.add(
@@ -111,7 +111,7 @@ fun getUsersList(): List<HogwartsDataHelper> {
             name = "Lisa Turpin",
             house = "Ravenclaw",
             actor = "Louis Cordice",
-            yearOfBirth = R.drawable.hogwarts_logo
+            yearOfBirth = R.drawable.pikachu
         )
     )
     return HogwartsHelperList

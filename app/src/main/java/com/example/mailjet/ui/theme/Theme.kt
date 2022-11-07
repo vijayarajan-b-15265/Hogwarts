@@ -6,12 +6,16 @@ import androidx.compose.material.ContentAlpha
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion
+import androidx.compose.ui.res.painterResource
 import com.example.mailjet.R
 
 private val DarkColorPalette = darkColors(
@@ -36,7 +40,9 @@ private val LightColorPalette = lightColors(
 )
 
 class DrawableResources(
-        @DrawableRes val navigationUp : Int
+        @DrawableRes val navigationUp : Int,
+        @DrawableRes val fabIcon: Int
+
 )
 
 val LocalDrawableResources = staticCompositionLocalOf<DrawableResources>{
@@ -44,11 +50,13 @@ val LocalDrawableResources = staticCompositionLocalOf<DrawableResources>{
 }
 
 private val DarkThemeDrawables = DrawableResources(
-    navigationUp = R.drawable.navigation_icon_white
+    navigationUp = R.drawable.navigation_icon_white,
+    fabIcon = R.drawable.navigation_icon_black
 )
 
 private val LightThemeDrawables = DrawableResources(
-    navigationUp = R.drawable.navigation_icon_black
+    navigationUp = R.drawable.navigation_icon_black,
+    fabIcon = R.drawable.navigation_icon_black
 )
 
 @Composable

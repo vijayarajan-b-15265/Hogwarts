@@ -2,20 +2,30 @@ package com.example.mailjet
 
 
 import android.annotation.SuppressLint
+import android.os.Build
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -24,11 +34,16 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.mailjet.data.HogwartsDataHelper
+import com.example.mailjet.ui.theme.LocalDrawableResources
 import com.example.mailjet.ui.theme.Shapes
 
 
@@ -77,18 +92,20 @@ fun MailItem(HogwartsDataHelper: HogwartsDataHelper ) {
     }
 }
 
-//@Composable
-//fun AlphabetIndexItem(text: String) {
-//    Text(text = text,
-//        textAlign = TextAlign.Left,
-//        modifier = Modifier
-//            .padding(start = 10.dp)
-//            .background(MaterialTheme.colors.onPrimary)
-//            .height(100.dp),
-//        color = MaterialTheme.colors.onBackground
-//    )
-//}
+@Composable
+fun AlphabetIndexItem(text: String) {
+    Text(text = text,
+        textAlign = TextAlign.Left,
+        modifier = Modifier
+            .background(MaterialTheme.colors.onPrimary)
+            .fillMaxWidth()
+            .padding(top = 15.dp, bottom = 15.dp),
+        color = MaterialTheme.colors.onBackground
+    )
+}
 
+@OptIn(ExperimentalFoundationApi::class)
+@RequiresApi(Build.VERSION_CODES.N)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList(), state : LazyListState) {
@@ -112,14 +129,18 @@ fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList(), state :
                     backgroundColor = MaterialTheme.colors.primaryVariant
                 )
             },
-            floatingActionButton = {
+//            floatingActionButton = {
 //                                   Image(
-//                                       painter = painterResource(id = R.drawable.ic_tag),
+//                                       painter = painterResource(id = LocalDrawableResources.current.fabIcon),
 //                                       contentDescription = "Add tag",
-//                                       modifier = Modifier.padding(bottom = 50.dp, end = 50.dp).clickable {
-//                                           Toast.makeText(context, "Fab clicked", Toast.LENGTH_SHORT).show()
-//                                       })
-            },
+//                                       modifier = Modifier.
+//                                       padding(bottom = 25.dp, end = 25.dp).
+//                                       background(MaterialTheme.colors.onBackground).
+//                                       padding(10.dp).
+//                                       height(25.dp).
+//                                       width(25.dp).
+//                                       clickable {})
+//            },
             bottomBar = {
 
             },
@@ -129,16 +150,15 @@ fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList(), state :
                     contentPadding = PaddingValues(20.dp),
                     state = state) {
 
-                    items(profileList) {
-                        MailItem(HogwartsDataHelper = it)
-                    }
+                    val groupList = profileList.groupBy { it.house }
 
-                    items(profileList) {
-                        MailItem(HogwartsDataHelper = it)
-                    }
-
-                    items(profileList) {
-                        MailItem(HogwartsDataHelper = it)
+                    groupList.forEach { (houseName, dataList) ->
+                        stickyHeader {
+                            AlphabetIndexItem(text = houseName)
+                        }
+                        items(dataList){ hogwartsHelper->
+                            MailItem(HogwartsDataHelper = hogwartsHelper)
+                        }
                     }
                 }
             }
