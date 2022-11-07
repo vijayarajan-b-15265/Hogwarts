@@ -24,7 +24,7 @@ data class HogwartsDataHelper(
     val yearOfBirth: Int
 )
 
-fun geUsersList(): List<HogwartsDataHelper> {
+fun getUsersList(): List<HogwartsDataHelper> {
     val HogwartsHelperList = ArrayList<HogwartsDataHelper>()
     HogwartsHelperList.add(
         HogwartsDataHelper(
