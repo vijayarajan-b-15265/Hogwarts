@@ -2,6 +2,7 @@ package com.example.mailjet.ui.theme
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
@@ -42,15 +43,12 @@ val LocalDrawableResources = staticCompositionLocalOf<DrawableResources>{
     error("Local drawable are not present")
 }
 
-
-
-
 private val DarkThemeDrawables = DrawableResources(
-    navigationUp = R.drawable.ic_tag
+    navigationUp = R.drawable.navigation_icon_white
 )
 
 private val LightThemeDrawables = DrawableResources(
-    navigationUp = R.drawable.ic_tag
+    navigationUp = R.drawable.navigation_icon_black
 )
 
 @Composable
@@ -72,10 +70,9 @@ fun MailJetTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composabl
         colors = colors,
         typography = Typography,
         shapes = Shapes,
-//        content
     )
     {
-        CompositionLocalProvider( LocalDrawableResources provides appDrawables,
+        CompositionLocalProvider( LocalDrawableResources provides appDrawables, LocalContentAlpha provides ContentAlpha.medium,
             content = content )
     }
 }

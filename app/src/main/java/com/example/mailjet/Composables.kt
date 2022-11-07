@@ -1,9 +1,13 @@
 package com.example.mailjet
 
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -98,6 +102,7 @@ fun AlphabetIndexItem(text: String) {
     )
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList()) {
 
@@ -107,20 +112,26 @@ fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList()) {
                 TopAppBar(
                     title = {
                         Text(
-                            text = "Hogwarts", color = MaterialTheme.colors.onBackground
+                            text = "Hogwarts", color = MaterialTheme.colors.onBackground, modifier = Modifier.padding(start = 10.dp)
                         )
                     },
-                    navigationIcon = {
-                        IconButton(onClick = { }) {
-                            Icon(
-                                imageVector =  ImageVector.vectorResource(id = LocalDrawableResources.current.navigationUp),
-                                contentDescription = "Nav back")
-                        }
-                    }, backgroundColor = AppbarColor
+//                    navigationIcon = {
+//                        IconButton(onClick = { }) {
+//                            Icon(
+//                                imageVector =  ImageVector.vectorResource(id = LocalDrawableResources.current.navigationUp),
+//                                contentDescription = "Navigation back")
+//                        }
+//                    },
+                    backgroundColor = MaterialTheme.colors.primaryVariant
                 )
             },
             floatingActionButton = {
-
+//                                   Image(
+//                                       painter = painterResource(id = R.drawable.ic_tag),
+//                                       contentDescription = "Add tag",
+//                                       modifier = Modifier.padding(bottom = 50.dp, end = 50.dp).clickable {
+//                                           Toast.makeText(context, "Fab clicked", Toast.LENGTH_SHORT).show()
+//                                       })
             },
             bottomBar = {
 
