@@ -25,7 +25,7 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = Companion.White,
+    primary = Color.White,
     primaryVariant = lightGrey,
     secondary = darkBlue
 

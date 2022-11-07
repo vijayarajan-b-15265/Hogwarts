@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -37,24 +38,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.example.mailjet.data.HogwartsDataHelper
 import com.example.mailjet.ui.theme.LocalDrawableResources
 import com.example.mailjet.ui.theme.Shapes
 
 
+@OptIn(ExperimentalGlideComposeApi::class, ExperimentalCoilApi::class)
 @Composable
-fun MailItem(HogwartsDataHelper: HogwartsDataHelper ) {
+fun MailItem(hogwartsDataHelper: HogwartsDataHelper) {
 
     Card(
         modifier = Modifier
             .background(MaterialTheme.colors.surface, shape = Shapes.medium)
-            .padding(top = 10.dp) ,
-        elevation = 10.dp
+            .clip(RoundedCornerShape(20))
+            .fillMaxWidth(),
+        elevation = 100.dp
     ) {
 
         Row(
@@ -63,24 +71,24 @@ fun MailItem(HogwartsDataHelper: HogwartsDataHelper ) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            Image(
-                painter = painterResource(id = HogwartsDataHelper.yearOfBirth),
+            GlideImage(
+                model = hogwartsDataHelper.image,
                 contentDescription = "Profile Image",
                 modifier = Modifier
-                    .border(1.dp, MaterialTheme.colors.primary)
-                    .background(color = Color.Black)
-                    .size(100.dp)
+                    .size(height = 100.dp, width = 80.dp),
+                contentScale = ContentScale.FillBounds,
+                alignment = Alignment.Center
             )
             Column(
                 modifier = Modifier
-                    .padding(start = 10.dp)
-                    .fillMaxWidth()
-                ,verticalArrangement = Arrangement.SpaceEvenly,
+                    .padding(start = 20.dp)
+                    .fillMaxWidth(),
+                verticalArrangement = Arrangement.SpaceEvenly,
             ) {
-                Text(text = HogwartsDataHelper.name, color = MaterialTheme.colors.onBackground)
-                Text(text = HogwartsDataHelper.house, color = MaterialTheme.colors.onBackground)
+                Text(text = hogwartsDataHelper.name, color = MaterialTheme.colors.onBackground)
+                Text(text = hogwartsDataHelper.house, color = MaterialTheme.colors.onBackground)
                 Text(
-                    text = HogwartsDataHelper.actor,
+                    text = hogwartsDataHelper.actor,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     color = MaterialTheme.colors.onBackground
@@ -94,21 +102,26 @@ fun MailItem(HogwartsDataHelper: HogwartsDataHelper ) {
 
 @Composable
 fun AlphabetIndexItem(text: String) {
-    Text(text = text,
-        textAlign = TextAlign.Left,
+    Card(
         modifier = Modifier
-            .background(MaterialTheme.colors.onPrimary)
-            .fillMaxWidth()
-            .padding(top = 15.dp, bottom = 15.dp),
-        color = MaterialTheme.colors.onBackground
-    )
+            .clip(RoundedCornerShape(80))
+            .padding(0.dp),
+        elevation = 100.dp) {
+        Text(
+            text = text,
+            textAlign = TextAlign.Left,
+            modifier = Modifier
+                .padding(15.dp),
+            color = MaterialTheme.colors.onBackground
+        )
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @RequiresApi(Build.VERSION_CODES.N)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList(), state : LazyListState) {
+fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList(), state: LazyListState) {
 
     Surface {
         Scaffold(
@@ -116,7 +129,9 @@ fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList(), state :
                 TopAppBar(
                     title = {
                         Text(
-                            text = "Hogwarts", color = MaterialTheme.colors.onBackground, modifier = Modifier.padding(start = 10.dp)
+                            text = "Hogwarts",
+                            color = MaterialTheme.colors.onBackground,
+                            modifier = Modifier.padding(start = 10.dp)
                         )
                     },
 //                    navigationIcon = {
@@ -126,7 +141,7 @@ fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList(), state :
 //                                contentDescription = "Navigation back")
 //                        }
 //                    },
-                    backgroundColor = MaterialTheme.colors.primaryVariant
+                    backgroundColor = MaterialTheme.colors.primary
                 )
             },
 //            floatingActionButton = {
@@ -145,10 +160,11 @@ fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList(), state :
 
             },
             content = {
-                LazyColumn (
-                    verticalArrangement = Arrangement.spacedBy(10.dp),
-                    contentPadding = PaddingValues(20.dp),
-                    state = state) {
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(25.dp),
+                    contentPadding = PaddingValues(25.dp),
+                    state = state,
+                ) {
 
                     val groupList = profileList.groupBy { it.house }
 
@@ -156,8 +172,8 @@ fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList(), state :
                         stickyHeader {
                             AlphabetIndexItem(text = houseName)
                         }
-                        items(dataList){ hogwartsHelper->
-                            MailItem(HogwartsDataHelper = hogwartsHelper)
+                        items(dataList) { hogwartsHelper ->
+                            MailItem(hogwartsDataHelper = hogwartsHelper)
                         }
                     }
                 }
