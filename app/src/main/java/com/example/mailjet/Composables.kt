@@ -1,9 +1,6 @@
 package com.example.mailjet
 
-
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,17 +16,22 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -46,15 +48,15 @@ fun MailItem(hogwartsDataHelper: HogwartsDataHelper) {
 
     Card(
         modifier = Modifier
-            .background(MaterialTheme.colors.surface, shape = Shapes.medium)
+            .background(MaterialTheme.colorScheme.surface, shape = Shapes.extraLarge)
             .clip(RoundedCornerShape(20))
             .fillMaxWidth(),
-        elevation = 100.dp
+        elevation = CardDefaults.cardElevation(20.dp)
     ) {
 
         Row(
             modifier = Modifier
-                .background(MaterialTheme.colors.primary),
+                .background(MaterialTheme.colorScheme.primary),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
@@ -68,7 +70,7 @@ fun MailItem(hogwartsDataHelper: HogwartsDataHelper) {
                 alignment = Alignment.Center,
                 loading = {
                     CircularProgressIndicator(
-                        progress = 0.5F,
+//                        progress = 0.5F,
                         modifier = Modifier
                             .height(5.dp)
                             .width(5.dp)
@@ -81,13 +83,16 @@ fun MailItem(hogwartsDataHelper: HogwartsDataHelper) {
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.SpaceEvenly,
             ) {
-                Text(text = hogwartsDataHelper.name, color = MaterialTheme.colors.onBackground)
-                Text(text = hogwartsDataHelper.house, color = MaterialTheme.colors.onBackground)
+                Text(text = hogwartsDataHelper.name, color = MaterialTheme.colorScheme.onBackground)
+                Text(
+                    text = hogwartsDataHelper.house,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
                 Text(
                     text = hogwartsDataHelper.actor,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    color = MaterialTheme.colors.onBackground
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             }
         }
@@ -102,22 +107,27 @@ fun AlphabetIndexItem(text: String) {
         modifier = Modifier
             .clip(RoundedCornerShape(80))
             .padding(0.dp),
-        elevation = 100.dp) {
+        elevation = CardDefaults.cardElevation(100.dp)
+    ) {
         Text(
             text = text,
             textAlign = TextAlign.Left,
             modifier = Modifier
                 .padding(15.dp),
-            color = MaterialTheme.colors.onBackground
+            color = MaterialTheme.colorScheme.onBackground
         )
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
-@RequiresApi(Build.VERSION_CODES.N)
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList(), state: LazyListState) {
+fun UserProfileList(
+    profileList: List<HogwartsDataHelper> = emptyList(),
+    state: LazyListState,
+    navigationUp: () -> Unit
+) {
 
     Surface {
         Scaffold(
@@ -126,31 +136,37 @@ fun UserProfileList(profileList: List<HogwartsDataHelper> = emptyList(), state: 
                     title = {
                         Text(
                             text = "Hogwarts",
-                            color = MaterialTheme.colors.onBackground,
+                            color = MaterialTheme.colorScheme.onBackground,
                             modifier = Modifier.padding(start = 10.dp)
                         )
                     },
-//                    navigationIcon = {
-//                        IconButton(onClick = { }) {
-//                            Icon(
-//                                imageVector =  ImageVector.vectorResource(id = LocalDrawableResources.current.navigationUp),
-//                                contentDescription = "Navigation back")
-//                        }
-//                    },
-//                    backgroundColor = MaterialTheme.colors.primary
+                    navigationIcon = {
+                        Button(onClick = { }) {
+
+                        }
+//                        IconButton(
+//                            onClick = navigationUp, enabled = true, content = {
+//                                Image(
+//                                    painter = painterResource(
+//                                        id = LocalDrawableResources.current.navigationUp
+//                                    ),
+//                                    contentDescription = "Navigation up")
+//                            })
+                    },
+                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.Transparent)
                 )
             },
             floatingActionButton = {
 //                                   Image(
 //                                       painter = painterResource(id = LocalDrawableResources.current.fabIcon),
 //                                       contentDescription = "Add tag",
-//                                       modifier = Modifier.
-//                                       padding(bottom = 25.dp, end = 25.dp).
-//                                       background(MaterialTheme.colors.onBackground).
-//                                       padding(10.dp).
-//                                       height(25.dp).
-//                                       width(25.dp).
-//                                       clickable {})
+//                                       modifier = Modifier
+//                                           .padding(bottom = 25.dp, end = 25.dp)
+//                                           .background(Color.Blue)
+//                                           .padding(10.dp)
+//                                           .height(25.dp)
+//                                           .width(25.dp)
+//                                           .clickable {}, )
             },
             bottomBar = {
 

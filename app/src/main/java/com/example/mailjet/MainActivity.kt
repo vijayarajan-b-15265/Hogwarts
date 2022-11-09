@@ -2,15 +2,16 @@ package com.example.mailjet
 
 import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import com.example.mailjet.data.getUsersList
 import com.example.mailjet.ui.theme.MailJetTheme
 
+@ExperimentalFoundationApi
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,14 +19,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             val state = rememberLazyListState()
 
-            val showScrollToTop = remember {
-                derivedStateOf {
-                    state.firstVisibleItemIndex > 0
-                }
-            }
-
             MailJetTheme {
-                UserProfileList(profileList = getUsersList(), state = state)
+                UserProfileList(
+                    profileList = getUsersList(),
+                    state = state,
+                    navigationUp = {
+                        Toast.makeText(this, "Back clicked", Toast.LENGTH_SHORT).show()
+                    })
             }
         }
     }

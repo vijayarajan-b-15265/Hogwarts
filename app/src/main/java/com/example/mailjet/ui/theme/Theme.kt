@@ -2,31 +2,24 @@ package com.example.mailjet.ui.theme
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion
-import androidx.compose.ui.res.painterResource
 import com.example.mailjet.R
 
-private val DarkColorPalette = darkColors(
+private val DarkColorPalette = darkColorScheme(
     primary = Color.Black,
-    primaryVariant = darkGrey,
+    onPrimaryContainer = darkGrey,
     secondary = lightBlue
 )
 
-private val LightColorPalette = lightColors(
+private val LightColorPalette = lightColorScheme(
     primary = Color.White,
-    primaryVariant = lightGrey,
+    onPrimaryContainer = lightGrey,
     secondary = darkBlue
 
     /* Other default colors to override
@@ -40,12 +33,12 @@ private val LightColorPalette = lightColors(
 )
 
 class DrawableResources(
-        @DrawableRes val navigationUp : Int,
-        @DrawableRes val fabIcon: Int
+    @DrawableRes val navigationUp: Int,
+    @DrawableRes val fabIcon: Int
 
 )
 
-val LocalDrawableResources = staticCompositionLocalOf<DrawableResources>{
+val LocalDrawableResources = staticCompositionLocalOf<DrawableResources> {
     error("Local drawable are not present")
 }
 
@@ -67,20 +60,21 @@ fun MailJetTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composabl
         LightColorPalette
     }
 
-    val appDrawables = if (darkTheme){
+    val appDrawables = if (darkTheme) {
         DarkThemeDrawables
-    }
-    else {
+    } else {
         LightThemeDrawables
     }
 
     MaterialTheme(
-        colors = colors,
+        colorScheme = colors,
         typography = Typography,
-        shapes = Shapes,
+        shapes = Shapes
     )
     {
-        CompositionLocalProvider( LocalDrawableResources provides appDrawables, LocalContentAlpha provides ContentAlpha.medium,
-            content = content )
+        CompositionLocalProvider(
+            LocalDrawableResources provides appDrawables,
+            content = content
+        )
     }
 }
