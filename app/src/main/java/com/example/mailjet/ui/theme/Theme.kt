@@ -14,13 +14,15 @@ import com.example.mailjet.R
 private val DarkColorPalette = darkColorScheme(
     primary = Color.Black,
     onPrimaryContainer = darkGrey,
-    secondary = lightBlue
+    secondary = Color.Black,
+    background = darkGrey
 )
 
 private val LightColorPalette = lightColorScheme(
     primary = Color.White,
     onPrimaryContainer = lightGrey,
-    secondary = darkBlue
+    secondary = Color.White,
+    background = lightGrey
 
     /* Other default colors to override
     background = Color.White,
