@@ -1,4 +1,6 @@
-package com.example.mailjet
+@file:Suppress("OPT_IN_IS_NOT_ENABLED")
+
+package com.example.mailjet.utils
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -15,7 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -42,12 +43,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
-import com.example.mailjet.data.HogwartsDataHelper
+import com.example.mailjet.R
+import com.example.mailjet.model.HogwartsDetailsHelper
 import com.example.mailjet.ui.theme.LocalDrawableResources
+import com.example.mailjet.viewmodel.HogwartsState
 
 
 @Composable
-fun MailItem(hogwartsDataHelper: HogwartsDataHelper) {
+fun MailItem(hogwartsDataHelper: HogwartsDetailsHelper) {
     Card(
         modifier = Modifier
             .clip(RoundedCornerShape(10.dp))
@@ -60,6 +63,7 @@ fun MailItem(hogwartsDataHelper: HogwartsDataHelper) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
+
             SubcomposeAsyncImage(
                 model = ImageRequest.Builder(LocalContext.current).data(hogwartsDataHelper.image)
                     .crossfade(true).build(),
@@ -125,8 +129,7 @@ fun AlphabetIndexItem(text: String) {
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun UserProfileList(
-    profileList: List<HogwartsDataHelper> = emptyList(),
-    state: LazyListState,
+    state: HogwartsState,
     navigationUp: () -> Unit
 ) {
 
@@ -170,17 +173,18 @@ fun UserProfileList(
                         .clickable {},
                 )
             },
+
             content = {
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(20.dp),
                     contentPadding = PaddingValues(20.dp),
-                    state = state,
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.background)
-                        .padding(top = 70.dp)
                 ) {
 
-                    val groupList = profileList.groupBy { it.house }
+
+                    val groupList = state.studentsDetailsList.filter { it.house.isNotEmpty() }
+                        .groupBy { it.house }
 
                     groupList.forEach { (houseName, dataList) ->
                         stickyHeader {
@@ -191,6 +195,10 @@ fun UserProfileList(
                         }
                     }
                 }
+            },
+
+            bottomBar = {
+
             }
         )
     }
