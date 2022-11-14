@@ -15,14 +15,16 @@ private val DarkColorPalette = darkColorScheme(
     primary = Color.Black,
     onPrimaryContainer = darkGrey,
     secondary = Color.Black,
-    background = darkGrey
+    background = darkGrey,
+    surface = Color.Black
 )
 
 private val LightColorPalette = lightColorScheme(
     primary = Color.White,
     onPrimaryContainer = lightGrey,
     secondary = Color.White,
-    background = lightGrey
+    background = lightGrey,
+    surface = Color.White
 
     /* Other default colors to override
     background = Color.White,

@@ -1,7 +1,9 @@
 package com.example.mailjet.utils
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,15 +12,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -44,26 +49,38 @@ fun StudentsProfileComposition(hogwartsDataHelper: HogwartsDetailsHelper) {
             horizontalArrangement = Arrangement.Center
         ) {
 
-            SubcomposeAsyncImage(model = ImageRequest.Builder(LocalContext.current)
-                .data(hogwartsDataHelper.image).crossfade(true).build(),
-                contentDescription = "Profile Image",
-                modifier = Modifier.size(height = 100.dp, width = 80.dp),
-                contentScale = ContentScale.FillBounds,
-                alignment = Alignment.Center,
-                loading = {
-                    CircularProgressIndicator(
-                        modifier = Modifier
-                            .height(5.dp)
-                            .width(5.dp)
-                    )
-                })
+            Box {
+                SubcomposeAsyncImage(model = ImageRequest.Builder(LocalContext.current)
+                    .data(hogwartsDataHelper.image).crossfade(true).build(),
+                    contentDescription = "Profile Image",
+                    modifier = Modifier.size(height = 100.dp, width = 80.dp),
+                    contentScale = ContentScale.FillBounds,
+                    alignment = Alignment.Center,
+                    loading = {
+                        Log.i("Hogwarts", "Loading Image")
+                    })
+
+                Icon(
+                    imageVector = Icons.Filled.Favorite,
+                    contentDescription = "Favourite",
+                    tint = Color.Red,
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .height(15.dp)
+                        .width(15.dp)
+                )
+            }
             Column(
                 modifier = Modifier
                     .padding(start = 20.dp)
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.SpaceEvenly,
             ) {
-                Text(text = hogwartsDataHelper.name, color = MaterialTheme.colorScheme.onBackground)
+                Text(
+                    text = hogwartsDataHelper.name,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+
                 Text(
                     text = hogwartsDataHelper.house, color = MaterialTheme.colorScheme.onBackground
                 )
