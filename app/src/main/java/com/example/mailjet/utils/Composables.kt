@@ -7,6 +7,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +19,7 @@ import androidx.compose.material.icons.sharp.AddCircle
 import androidx.compose.material.icons.sharp.Info
 import androidx.compose.material.icons.sharp.Notifications
 import androidx.compose.material.icons.sharp.Settings
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -27,6 +29,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -99,28 +102,42 @@ fun UserProfileList(
                 }
             },
             content = { innerPadding ->
-                LazyColumn(
-                    verticalArrangement = Arrangement.spacedBy(20.dp),
-                    contentPadding = PaddingValues(20.dp),
-                    modifier = Modifier
-                        .background(MaterialTheme.colorScheme.background)
-                        .padding(
-                            top = innerPadding.calculateTopPadding(),
-                            bottom = innerPadding.calculateBottomPadding()
-                        )
-                ) {
-                    val groupList = state.studentsDetailsList.filter { it.house.isNotEmpty() }
-                        .groupBy { it.house }
 
-                    groupList.forEach { (houseName, dataList) ->
-                        stickyHeader {
-                            AlphabetIndexItem(text = houseName)
-                        }
-                        items(dataList) { hogwartsHelper ->
-                            StudentsProfileComposition(hogwartsDataHelper = hogwartsHelper)
+                Box {
+
+                    LazyColumn(
+                        verticalArrangement = Arrangement.spacedBy(20.dp),
+                        contentPadding = PaddingValues(20.dp),
+                        modifier = Modifier
+                            .background(MaterialTheme.colorScheme.background)
+                            .padding(
+                                top = innerPadding.calculateTopPadding(),
+                                bottom = innerPadding.calculateBottomPadding()
+                            )
+                    ) {
+                        val groupList = state.studentsDetailsList.filter { it.house.isNotEmpty() }
+                            .groupBy { it.house }
+
+                        groupList.forEach { (houseName, dataList) ->
+                            stickyHeader {
+                                AlphabetIndexItem(text = houseName)
+                            }
+                            items(dataList) { hogwartsHelper ->
+                                StudentsProfileComposition(hogwartsDataHelper = hogwartsHelper)
+                            }
                         }
                     }
+
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.inverseSurface,
+                        modifier = Modifier.align(
+                            Alignment.Center
+                        ),
+                        strokeWidth = 3.dp,
+                    )
                 }
+
+
             })
     }
 }

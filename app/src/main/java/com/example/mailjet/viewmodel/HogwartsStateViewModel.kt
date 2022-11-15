@@ -22,13 +22,17 @@ class HogwartsStateViewModel : ViewModel() {
                 if (apiResponse.isSuccessful) {
                     _hogwartsDetailsList.value =
                         _hogwartsDetailsList.value.copy(studentsDetailsList = apiResponse.body()!!)
+                    Log.i(
+                        "HogwartsDetailsList",
+                        "The value is ${_hogwartsDetailsList.value.studentsDetailsList.size}"
+                    )
                 } else {
                     Log.i("MailJet", " API failed ${apiResponse.message()}")
                 }
             } catch (e: Exception) {
-                Log.d("MailJet", e.stackTraceToString())
+                Log.i("MailJet", e.stackTraceToString())
             } catch (e: SocketTimeoutException) {
-                Log.d("exception", e.stackTraceToString())
+                Log.i("exception", e.stackTraceToString())
             }
         }
     }
