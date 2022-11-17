@@ -15,11 +15,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.sharp.AddCircle
 import androidx.compose.material.icons.sharp.Info
 import androidx.compose.material.icons.sharp.Notifications
 import androidx.compose.material.icons.sharp.Settings
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,7 +27,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -92,14 +89,8 @@ fun UserProfileList(
                             }
                         }
 
-                    },
-//                colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.background)
+                    }
                 )
-            },
-            floatingActionButton = {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Sharp.AddCircle, contentDescription = "Add Item")
-                }
             },
             content = { innerPadding ->
 
@@ -111,12 +102,13 @@ fun UserProfileList(
                         modifier = Modifier
                             .background(MaterialTheme.colorScheme.background)
                             .padding(
-                                top = innerPadding.calculateTopPadding(),
+                                top = innerPadding.calculateTopPadding() + 10.dp,
                                 bottom = innerPadding.calculateBottomPadding()
                             )
                     ) {
                         val groupList = state.studentsDetailsList.filter { it.house.isNotEmpty() }
                             .groupBy { it.house }
+
 
                         groupList.forEach { (houseName, dataList) ->
                             stickyHeader {
@@ -127,14 +119,6 @@ fun UserProfileList(
                             }
                         }
                     }
-
-                    CircularProgressIndicator(
-                        color = MaterialTheme.colorScheme.inverseSurface,
-                        modifier = Modifier.align(
-                            Alignment.Center
-                        ),
-                        strokeWidth = 3.dp,
-                    )
                 }
 
 
