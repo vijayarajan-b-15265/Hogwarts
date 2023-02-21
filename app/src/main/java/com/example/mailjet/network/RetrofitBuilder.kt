@@ -13,7 +13,7 @@ object RetrofitBuilder {
         val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-        val retrofit = Retrofit.Builder().client(client).baseUrl("https://hp-api.herokuapp.com/")
+        val retrofit = Retrofit.Builder().client(client).baseUrl("https://hp-api.onrender.com/")
             .addConverterFactory(MoshiConverterFactory.create(moshi)).build()
         return retrofit.create(RetrofitInterface::class.java)
     }
